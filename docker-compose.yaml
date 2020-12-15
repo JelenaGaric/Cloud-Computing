@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+    cloud-web:
+        build: .
+        restart: unless-stopped
+        ports:
+            - "8000:80"
+        depends_on:
+            - cloud-db
+    cloud-db:
+        image: "mcr.microsoft.com/mssql/server"
+        environment:
+            SA_PASSWORD: "CloudComputing46"
+            ACCEPT_EULA: "Y"
