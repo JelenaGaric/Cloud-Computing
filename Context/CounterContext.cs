@@ -17,12 +17,23 @@ namespace CloudComputing.Context
         public CounterContext(IConfiguration configuration)
         {
             Configuration = configuration;
+            try
+            {
+                this.Database.Migrate();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            var connection = @"Server=cloud-db;Database=master;User=sa;Password=CloudComputing46;";
+            optionsBuilder.UseSqlServer(connection);
             //optionsBuilder.UseSqlServer(Configuration["ConnectionStrings:CloudComputingConnection"]);
 
             // optionsBuilder.UseLazyLoadingProxies();
+           
         }
     }
 }
