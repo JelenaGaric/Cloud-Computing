@@ -20,7 +20,7 @@ namespace CloudComputing.Context
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Configuration["ConnectionStrings:CloudComputingConnection"]);
+            //optionsBuilder.UseSqlServer(Configuration["ConnectionStrings:CloudComputingConnection"]);
 
             // optionsBuilder.UseLazyLoadingProxies();
         }

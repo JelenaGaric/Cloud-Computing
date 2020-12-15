@@ -7,7 +7,9 @@ using CloudComputing.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,7 +29,18 @@ namespace CloudComputing
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CounterContext>();
+            // Database connection string.
+            var connection = @"Server=cloud-db;Database=master;User=sa;Password=CloudComputing46;";
+
+            // This line uses 'UseSqlServer' in the 'options' parameter
+            // with the connection string defined above.
+            services.AddDbContext<CounterContext>(
+                options => options.UseSqlServer(connection));
+
+            services.AddIdentity<CounterContext, IdentityRole>()
+                .AddDefaultTokenProviders();
+           
+            //services.AddDbContext<CounterContext>();
             //services.AddCors();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddControllers();

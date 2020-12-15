@@ -48,7 +48,7 @@ namespace CloudComputing.Controllers
         [Route("increment")]
         public async Task<ActionResult<string>> IncrementCounter()
         {
-            /*try
+            try
             {
                 // for now I'm incrementing always the first counter in db
                  var counter = await _repoWrapper.Counter.GetCounter(1);
@@ -74,8 +74,8 @@ namespace CloudComputing.Controllers
             {
                 Console.WriteLine($"Something went wrong inside IncrementCounter action: {e.Message}");
                 return StatusCode(404, e.Message);
-            }*/
-			return Ok("Ok!");
+            }
+			//return Ok("Ok!");
 
         }
         
