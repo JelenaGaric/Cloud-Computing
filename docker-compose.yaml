@@ -3,12 +3,20 @@ services:
     cloud-web:
         build: .
         restart: unless-stopped
+        container_name: cloud-web
         ports:
             - "8000:80"
         depends_on:
             - cloud-db
     cloud-db:
-        image: "mcr.microsoft.com/mssql/server"
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        restart: unless-stopped
+        container_name: cloud-db
+        volumes:
+            - sqlServerDB:/var/opt/mssql/data
         environment:
             SA_PASSWORD: "CloudComputing46"
             ACCEPT_EULA: "Y"
+
+volumes:
+    sqlServerDB:
