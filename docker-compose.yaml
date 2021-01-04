@@ -1,7 +1,7 @@
 version: "3.8"
 services:
     cloud-web:
-        build: .
+        build: ./Cloud-Computing
         restart: unless-stopped
         container_name: cloud-web
         ports:
