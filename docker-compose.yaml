@@ -4,8 +4,6 @@ services:
         build: ./Cloud-Computing
         restart: unless-stopped
         container_name: cloud-web
-        ports:
-            - "8000:80"
         depends_on:
             - cloud-db
     cloud-db:
@@ -21,7 +19,14 @@ services:
           - sqllog:/var/opt/sqlserver/log
           - sqlbackup:/var/opt/sqlserver/backup
         
-
+    nginx:
+        build: ./nginx
+        container_name: nginx
+        ports:
+            - "8000:8000"
+        depends_on:
+            - cloud-web
+      
 volumes:
   sqlsystem:
   sqldata:
