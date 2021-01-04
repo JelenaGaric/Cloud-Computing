@@ -23,9 +23,7 @@ services:
         build: ./nginx
         container_name: nginx
         ports:
-            - "8000:8000"
-        depends_on:
-            - cloud-web
+            - "8080:80"
       
 volumes:
   sqlsystem:
