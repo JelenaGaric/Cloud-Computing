@@ -1,7 +1,7 @@
 version: "3.8"
 services:
     cloud-web1:
-        build: ./Cloud-Computing
+        image: "jelenagaric/cloud-computing:latest"
         restart: unless-stopped
         container_name: cloud-web1
         depends_on:
@@ -19,7 +19,7 @@ services:
           - sqllog:/var/opt/sqlserver/log
           - sqlbackup:/var/opt/sqlserver/backup
     cloud-web2:
-        build: ./Cloud-Computing
+        image: "jelenagaric/cloud-computing:latest"
         restart: unless-stopped
         container_name: cloud-web2
         depends_on:
@@ -35,7 +35,7 @@ services:
           - sqlsystem:/var/opt/mssql/
           - sqldata:/var/opt/sqlserver/data
           - sqllog:/var/opt/sqlserver/log
-          - sqlbackup:/var/opt/sqlserver/backup
+          - sqlbackup:/var/opt/sqlserver/backup,,
     nginx:
         build: ./nginx
         container_name: nginx
