@@ -33,4 +33,4 @@ jobs:
           context: ./Cloud-Computing
           file: ./Cloud-Computing/Dockerfile
           push: true
-          tags: jelenagaric/Cloud-Computing:latest
+          tags: jelenagaric/cloud-computing:latest
