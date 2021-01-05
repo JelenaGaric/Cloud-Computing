@@ -1,15 +1,15 @@
 version: "3.8"
 services:
-    cloud-web:
+    cloud-web1:
         build: ./Cloud-Computing
         restart: unless-stopped
-        container_name: cloud-web
+        container_name: cloud-web1
         depends_on:
-            - cloud-db
-    cloud-db:
+            - cloud-db1
+    cloud-db1:
         image: "mcr.microsoft.com/mssql/server:2019-latest"
         restart: unless-stopped
-        container_name: cloud-db
+        container_name: cloud-db1
         env_file:
           - sqlserver.env
           - sapassword.env
@@ -18,7 +18,24 @@ services:
           - sqldata:/var/opt/sqlserver/data
           - sqllog:/var/opt/sqlserver/log
           - sqlbackup:/var/opt/sqlserver/backup
-        
+    cloud-web2:
+        build: ./Cloud-Computing
+        restart: unless-stopped
+        container_name: cloud-web2
+        depends_on:
+            - cloud-db2
+    cloud-db2:
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        restart: unless-stopped
+        container_name: cloud-db2
+        env_file:
+          - sqlserver.env
+          - sapassword.env
+        volumes:
+          - sqlsystem:/var/opt/mssql/
+          - sqldata:/var/opt/sqlserver/data
+          - sqllog:/var/opt/sqlserver/log
+          - sqlbackup:/var/opt/sqlserver/backup
     nginx:
         build: ./nginx
         container_name: nginx
